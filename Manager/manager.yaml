@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-manage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deploy-manage
+  template:
+    metadata:
+      labels:
+        app: deploy-manage
+    spec:
+      containers:
+        - name: deploy-manage
+          image: otaviocruz/manager_setup:6.0
+          ports:
+          - containerPort: 8080 #será que precisa? já tem EXPOSE no Dockerfile
+          command: ["/bin/sleep", "365d"]
+      nodeName: lascar-670z5e #master node name
+
+
+

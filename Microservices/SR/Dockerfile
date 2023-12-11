@@ -1,0 +1,4 @@
+FROM ndn_microservice/base:latest
+COPY SR_MT /SR_MT
+RUN cd /SR_MT && cmake . && make -j2 && mv bin/SR / && cd / && rm -r /SR_MT
+#ENTRYPOINT ["/SR"]
