@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: deploy-manage
-          image: otaviocruz/manager_setup:6.0
+          image: otaviocruz/manager_setup:11.0
           ports:
           - containerPort: 8080 #será que precisa? já tem EXPOSE no Dockerfile
           command: ["/bin/sleep", "365d"]

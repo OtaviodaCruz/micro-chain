@@ -144,7 +144,7 @@ if __name__ == "__main__":
 
     #nodeK8s.getAllK8sNodesInfo()
 
-    experimentSetup1()
+    #experimentSetup1()
 
     log.printWithColor("Init manager", type="INFO")
 
