@@ -23,7 +23,7 @@ Manager:
 
 Web app:
 
-- Open http://localhost:8080
+- Open http://<IP manager>:8080
 - Use the web application to manually deploy CS, BR and NR (New node)
 - Create links: *CS* -> *BR* and *BR* - > *NR* (New link)
 
