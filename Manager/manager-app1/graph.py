@@ -19,8 +19,8 @@ def addPodToGraph(graphObj, podObj, IPaddr:str, podType, podMonitorName, nodeK8s
                         addresses={"data": IPaddr, "command": IPaddr}, metrics = node_metrics[podType], nodeK8s = nodeK8sName, 
                         **copy.deepcopy(stats), **copy.deepcopy(node_attrs[podType])
                         )
-
-        graphObj.nodes[podObj.metadata.name]["lastScaled"] = time.time()
+        # starts the timer
+        graphObj.nodes[podObj.metadata.name]["lastScaled"] = time.time() 
 
         return True
 
@@ -29,7 +29,7 @@ def addPodToGraph(graphObj, podObj, IPaddr:str, podType, podMonitorName, nodeK8s
         log.writeDataLogFile("Add node graph error", ". Specification: " + str(e.args[0]) + ". " + str(traceback.format_exc()), type="CRITICAL")
         return False
 
-# gets
+# ---------------------------------- gets ----------------------------------
 def getCpuLimits(graphObj, podName:str):
     return graphObj[podName]["cpuLimits"]
 

@@ -19,14 +19,13 @@ import pod
 import static.NR as NR
 import static.config as managerConfig
 
-from kubernetes import client, config
+from kubernetes import client, config, utils
 from kubernetes.client.rest import ApiException
 
+## Declare objects
 app = Klein()
 
 graphPods = nx.DiGraph()
-
-graphNodes = nx.DiGraph()
 
 modules_socket = UDP_communication.ModulesSocket(graphPods)
 
@@ -63,11 +62,34 @@ except ApiException as e:
     print('Error When try get prometheus service address')
     mtgObj = monitoring.Monitoring()
 
+# ------------------------------------------------ Init node graphs ------------------------------------------------
+
+graphNodes = nx.Graph()
+
+#"count(node_cpu_seconds_total{mode="'"idle"'"}) by (instance)"
+#kube_pod_container_resource_limits{resource="cpu"}
+#kube_pod_container_resource_limits
+query_cpu = "sum(machine_cpu_cores) by (node)"
+result_cpu = mtgObj.runQuery(query_cpu)
+
+for result in result_cpu["data"]["result"]:
+    graphNodes.add_node(result["metric"]["node"])
+    graphNodes.nodes[result["metric"]["node"]]["cpu"] = Decimal(utils.parse_quantity(result["value"][1]))
+
+query_memory =  "sum(machine_memory_bytes) by (node)"
+result_memory= mtgObj.runQuery(query_memory)
+
+
+for result in result_memory["data"]["result"]:
+    graphNodes.nodes[result["metric"]["node"]]["memory"] = Decimal(utils.parse_quantity(result["value"][1]))
+
+print(graphNodes.nodes(data=True))
 #-------------------------------------------------Periodic Call-------------------------------------------------
 @defer.inlineCallbacks
 def controllLoopResource():
     yield operations.updateResourceStats(graphPods, mtgObj)
-    yield scale.autoScale(modules_socket, graphPods)
+    yield scale.autoScale(modules_socket, graphPods, graphNodes)
+    #print(scale.choose_node("sr", graphPods, graphNodes, "cs1", "br1", "cs2", "scale_up"))
 
 def controllLoopMetrics():
     mtgObj.verifyMetrics(graphPods)
@@ -119,13 +141,10 @@ def testLinkNodes(sourceNode, destinationNode):
         return "0"
 
 def experimentSetup1():
-    #microCS = testCreateNode("cs", nodeName="otaviopc1-270e5j-2570ej")
-    #microNR = testCreateNode("nr", nodeName="otaviopc2-270e5j-2570ej")
-    #microBR = testCreateNode("br", is_scalable=True, nodeName="otaviopc1-270e5j-2570ej")
 
-    microCS = testCreateNode("cs", nodeName="otaviopc2-270e5j-2570ej")
-    microNR = testCreateNode("nr", nodeName="otaviopc1-270e5j-2570ej")
-    microBR = testCreateNode("br", is_scalable=True, nodeName="otaviopc1-270e5j-2570ej")
+    microCS = testCreateNode("cs", nodeName="otaviopc-to-be-filled-by-o-e-m")
+    microNR = testCreateNode("nr", nodeName="otaviopc-to-be-filled-by-o-e-m")
+    microBR = testCreateNode("br", is_scalable=True, nodeName="otaviopc-to-be-filled-by-o-e-m")
 
     testLinkNodes(microCS, microBR)
     testLinkNodes(microBR, microNR)

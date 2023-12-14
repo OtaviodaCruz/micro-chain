@@ -10,8 +10,8 @@ spec:
     command: ["/bin/sleep", "365d"]
     resources:
       limits:
-        memory: "150M"
-        cpu: "300m"
+        memory: "250M"
+        cpu: "500m"
     
-  nodeName: otaviopc1-270e5j-2570ej
+  #nodeName: otaviopc1-270e5j-2570ej
 

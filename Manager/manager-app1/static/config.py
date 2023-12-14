@@ -8,7 +8,7 @@ max_attempt = 2
 #near_to_client = "otaviopc2-270e5j-2570ej"
 
 default_scale_policy = {"CS": {"cpu_max": 80, "cpu_min": 20, "memory_max":0, "memory_min":0}, 
-                "BR": {"cpu_max": 65, "cpu_min": 25, "memory_max":65, "memory_min":25}, 
+                "BR": {"cpu_max": 65, "cpu_min": 25, "memory_max":70, "memory_min":25}, 
                 "NR": {"cpu_max": 80, "cpu_min": 20, "memory_max":0, "memory_min":0}
                 }
 
