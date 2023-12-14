@@ -1,12 +1,12 @@
 ﻿# Micro-Chain
 
-This work is an extension of [uNDN](https://github.com/Nayald/NDN-microservices) for multi-node scenario.
+This work is an extension of [uNDN](https://github.com/Nayald/NDN-microservices) for multi-node scenarios, which are more complex.
 
 ## Setup
 
-The experiments were executed in a cluster with 3 laptops. Laptop 1 (Master) has installed K3s server, and Laptop 2 (Worker 1) and Laptop 3 (Work 2) has installed K3s agent.
+The experiments were executed in a cluster with 3 laptops. Laptop 1 (Master) has installed the K3s server, and Laptop 2 (Worker 1) and Laptop 3 (Work 2) has installed the K3s agent.
 
-After install K3s, the Manager, Web App and Prometheus are deployed in the Laptop 1. Similarly, NDNperf client and NDNperf server are deployed, respectively, on Laptop 1 and Laptop 2.
+After installing K3s, the Manager, Web App and Prometheus are deployed in the Laptop 1. Similarly, the NDNperf client and NDNperf server are deployed, respectively, on Laptop 1 and Laptop 2.
 
 ### Details
 
@@ -14,7 +14,9 @@ For Prometheus, we used the [prometheus-community helm](https://github.com/prome
 
 ## Experiment 
 
-Test the main operations using a scale scenario. The scenario consist in 3 laptops and 3 NDN microservices (*BR*, *NR*, *CS*), focusing on *BR* scaling.
+Test the main operations using a scale scenario. The scenario consists of 3 laptops and 3 NDN microservices (*BR*, *NR*, *CS*), focusing on *BR* scaling.
+
+Basic commands:
 
 Manager:
 
@@ -23,7 +25,7 @@ Manager:
 
 Web app:
 
-- Open http://<IP manager>:8080
+- Open ```http://<IP manager>:8080```
 - Use the web application to manually deploy CS, BR and NR (New node)
 - Create links: *CS* -> *BR* and *BR* - > *NR* (New link)
 
@@ -38,6 +40,7 @@ NDNPerf server:
 
 NDNPerf client:
 
+- ```kubectl exec -it <NDNPerf cliet pod name> -- bash```
 - ```nfdc face create tcp4://<IP BR>```
 - ```nfdc route add throughput <FACE ID NR>```
 - Starts the NDNPerf client: ```./ndnperf``` 
