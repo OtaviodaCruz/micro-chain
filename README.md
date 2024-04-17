@@ -18,7 +18,7 @@ Test the main operations using a scale scenario. The scenario consists of 3 lapt
 
 You can watch a video that show a scaling up and down [here](https://youtu.be/LlY3qNmlDBs) 
 
-Basic commands:
+### Basic commands:
 
 Manager:
 
