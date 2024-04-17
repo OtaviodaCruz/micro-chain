@@ -16,6 +16,8 @@ For Prometheus, we used the [prometheus-community helm](https://github.com/prome
 
 Test the main operations using a scale scenario. The scenario consists of 3 laptops and 3 NDN microservices (*BR*, *NR*, *CS*), focusing on *BR* scaling.
 
+You can watch a video that show a scaling up and down [here](https://youtu.be/LlY3qNmlDBs) 
+
 Basic commands:
 
 Manager:
