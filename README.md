@@ -1,5 +1,7 @@
 ﻿# Micro-Chain
 
+This repository contain the code used in [1].
+
 This work is an extension of [uNDN](https://github.com/Nayald/NDN-microservices) for multi-node scenarios, which are more complex.
 
 ## Setup
@@ -46,3 +48,7 @@ NDNPerf client:
 - ```nfdc face create tcp4://<IP BR>```
 - ```nfdc route add throughput <FACE ID NR>```
 - Starts the NDNPerf client: ```./ndnperf``` 
+
+### References
+
+[1] da Cruz, O. A. R., da Silva, A. A. S., Mendes, P. M., do Rosário, D. L., Cerqueira, E. C., dos Anjos, J. C. S., Pereira, C. E., & de Freitas, E. P. (2024). Micro-Chain: A Cluster Architecture for Managing NDN Microservices. Journal of Internet Services and Applications, 15(1), 424–437. https://doi.org/10.5753/jisa.2024.3965
